@@ -9,26 +9,28 @@ import * as L from 'leaflet';
 export class MapSelectorComponent implements OnInit, OnChanges {
   private map: L.Map | undefined;
 
-  // Declare markerData as an input property
-  @Input() markerData: { name: string; coordinates: [number, number] } = {
-    name: 'Default Marker',
-    coordinates: [51.5072, 0.1276] // Default coordinates (London)
-  };
+  // Declare markerData as an input property without default values
+  @Input() markerData?: { name: string; coordinates: [number, number] };
 
   ngOnInit(): void {
     this.initMap();
-    this.addMarker();
+    if (this.markerData) {
+      this.addMarker();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['markerData'] && !changes['markerData'].isFirstChange()) {
+    if (changes['markerData'] && !changes['markerData'].isFirstChange() && this.markerData) {
       this.addMarker();
     }
   }
 
   private initMap(): void {
+    // Set a fallback center if markerData is undefined
+    const initialCoordinates: [number, number] = this.markerData?.coordinates || [0, 0];
+
     this.map = L.map('map', {
-      center: this.markerData.coordinates, // Set initial map center
+      center: initialCoordinates, // Set initial map center
       zoom: 13
     });
 
@@ -39,7 +41,7 @@ export class MapSelectorComponent implements OnInit, OnChanges {
   }
 
   addMarker(): void {
-    if (this.markerData.coordinates.length === 2) {
+    if (this.markerData && this.markerData.coordinates.length === 2) {
       const { name, coordinates } = this.markerData;
 
       // Clear existing markers (optional)
@@ -58,7 +60,7 @@ export class MapSelectorComponent implements OnInit, OnChanges {
       // Pan the map to the new marker
       this.map!.setView(coordinates, this.map!.getZoom());
     } else {
-      console.error('Invalid marker data provided');
+      console.error('Invalid or missing marker data');
     }
   }
 }
