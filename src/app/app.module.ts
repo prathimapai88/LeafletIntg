@@ -10,6 +10,7 @@ import { MapSelectorComponent } from './components/maps/map-selector/map-selecto
 import { MapDisplayComponent } from './components/common/map-display/map-display.component';
 import { HomeComponent } from './components/common/home/home.component';
 import { MapPlotComponent } from './components/maps/map-plot/map-plot.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
 { path: '',component: HomeComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,19 @@
 <!-- map-plot.component.html -->
-<div>
-    <label for="filter">Filter Locations by Type:</label>
-    <select id="filter" (change)="filterLocations($event)" multiple>
-      <option *ngFor="let type of locationTypes" [value]="type">{{ type | titlecase }}</option>
-    </select>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <label for="filter">Filter Locations by Type:</label>
+      <select id="filter" class="form-select" (change)="filterLocations($event)" multiple>
+        <option *ngFor="let type of locationTypes" [value]="type">{{ type | titlecase }}</option>
+      </select>
+    </div>
+    <button (click)="togglePopups()">
+      {{ showAllPopups ? 'Close All Popups' : 'Open All Popups' }}
+    </button>
+
+    
   </div>
-  
-  <!-- Map container -->
-  <div id="map" style="height: 500px;"></div>
-  
+</div>
+
+<!-- Map container -->
+<div id="map" style="height: 500px;"></div>
