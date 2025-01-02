@@ -1,19 +1,25 @@
 <!-- map-plot.component.html -->
-<div class="container mt-3">
+<div class="container mt-4">
   <div class="row">
-    <div class="col-md-6">
-      <label for="filter">Filter Locations by Type:</label>
-      <select id="filter" class="form-select" (change)="filterLocations($event)" multiple>
+    <!-- Location Filter -->
+    <div class="col-md-6 mb-3">
+      <label for="filter" class="form-label d-flex align-items-center">
+        <i class="bi bi-filter me-2"></i> <!-- Bootstrap Icon for filter -->
+        Filter Locations by Type:
+      </label>
+      <select id="filter" [(ngModel)]="selectedLocationTypes" class="form-select" (change)="filterLocations($event)" multiple>
         <option *ngFor="let type of locationTypes" [value]="type">{{ type | titlecase }}</option>
       </select>
     </div>
-    <button (click)="togglePopups()">
-      {{ showAllPopups ? 'Close All Popups' : 'Open All Popups' }}
-    </button>
-
     
+    <!-- Button to Toggle Popups -->
+    <div class="col-md-6 mb-3 d-flex align-items-center">
+      <button class="btn btn-primary" (click)="togglePopups()">
+        {{ showAllPopups ? 'Close All Popups' : 'Open All Popups' }}
+      </button>
+    </div>
   </div>
-</div>
 
-<!-- Map container -->
-<div id="map" style="height: 500px;"></div>
+  <!-- Map Container -->
+  <div id="map" class="border rounded" style="height: 500px;"></div>
+</div>

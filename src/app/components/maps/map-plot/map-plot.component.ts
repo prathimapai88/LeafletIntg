@@ -9,7 +9,7 @@ import L from 'leaflet';
 export class MapPlotComponent implements OnInit {
   private map: L.Map | undefined;
   private markers: L.Marker[] = [];  // To keep track of the markers on the map
-
+  selectedLocationTypes: string[] = [];
   private popups: L.Popup[] = []; // Store references to popups
   showAllPopups: boolean = false; // Toggle state
   selectedLocation: string = ''; // Two-way binding for the typeahead input
@@ -74,6 +74,7 @@ export class MapPlotComponent implements OnInit {
   locationTypes = ['port', 'terminal', 'berth', 'refinery'];
 
   ngOnInit(): void {
+    this.selectedLocationTypes = [...this.locationTypes];
     this.initMap();
   }
 
@@ -114,7 +115,7 @@ export class MapPlotComponent implements OnInit {
 
     // Filter locations based on selected types
     const filteredLocations = this.locations.filter(location =>
-      selectedTypes.includes(location.type)
+      this.selectedLocationTypes.includes(location.type)
     );
 
     // Clear existing markers and add filtered ones
