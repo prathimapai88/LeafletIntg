@@ -1,0 +1,11 @@
+<!-- map-plot.component.html -->
+<div>
+    <label for="filter">Filter Locations by Type:</label>
+    <select id="filter" (change)="filterLocations($event)" multiple>
+      <option *ngFor="let type of locationTypes" [value]="type">{{ type | titlecase }}</option>
+    </select>
+  </div>
+  
+  <!-- Map container -->
+  <div id="map" style="height: 500px;"></div>
+  
