@@ -1,18 +1,31 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MapSelectorComponent } from './components/map-selector/map-selector.component';
+
+import { RouterModule, Routes } from '@angular/router';
+import { MapSelectorComponent } from './components/maps/map-selector/map-selector.component';
+import { MapDisplayComponent } from './components/common/map-display/map-display.component';
+import { HomeComponent } from './components/common/home/home.component';
+
+const routes: Routes = [
+{ path: '',component: HomeComponent},
+ { path: 'map',component: MapDisplayComponent}
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapSelectorComponent
+    MapSelectorComponent,
+    MapDisplayComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
