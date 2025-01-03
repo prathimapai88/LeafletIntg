@@ -11,11 +11,14 @@ import { MapDisplayComponent } from './components/common/map-display/map-display
 import { HomeComponent } from './components/common/home/home.component';
 import { MapPlotComponent } from './components/maps/map-plot/map-plot.component';
 import { FormsModule } from '@angular/forms';
+import { MapDrawComponent } from './components/maps/map-draw/map-draw.component';
 
 const routes: Routes = [
 { path: '',component: HomeComponent},
 { path: 'map',component: MapDisplayComponent},
-{ path: 'plot',component: MapPlotComponent}
+{ path: 'plot',component: MapPlotComponent},
+{ path: 'draw',component: MapDrawComponent},
+
 ];
 
 
@@ -24,7 +27,8 @@ const routes: Routes = [
     AppComponent,
     MapSelectorComponent,
     MapDisplayComponent,
-    MapPlotComponent
+    MapPlotComponent,
+    MapDrawComponent
   ],
   imports: [
     BrowserModule,
